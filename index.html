@@ -197,11 +197,11 @@
             <div class="polaroid-caption">My Humble Workstation</div>
         </div>
 
-        <!-- RETRO ITEM 2: Cassette Player (Music) -->
-        <div class="cassette-player board-item-music">
+        <!-- RETRO ITEM 2: Cassette Player (Music Stream Feature Add) -->
+        <div class="cassette-player board-item-music" id="cassettePlayer" role="button" aria-label="Play Sweater Weather">
             <div class="cassette-label">
-                <span>Side A</span>
-                <span>Stereo</span>
+                <span id="cassetteSide">Side A</span>
+                <span id="cassetteStatus">[ Click to Play ]</span>
             </div>
             <div class="cassette-reels">
                 <div class="reel"></div>
@@ -210,14 +210,14 @@
             <div class="cassette-info-row">
                 <div class="cassette-meta">
                     <div class="cassette-title">Sweater Weather</div>
-                    <div class="cassette-artist">The Neighborhood</div>
+                    <div class="cassette-artist">The Neighbourhood</div>
                 </div>
-                <a class="spotify-btn" href="https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6?si=2tW_5fMNRPGvNWJfxkAlWw&utm_source=copy-link" target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24">
-                        <polygon points="8,5 19,12 8,19" />
-                    </svg>
-                </a>
+                <div class="cassette-icon-state">
+                    <i data-lucide="music"></i>
+                </div>
             </div>
+            <!-- Audio stream element -->
+            <audio id="cassetteAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" loop></audio>
         </div>
 
         <!-- RETRO ITEM 3: Retro Game Cartridge (Inspirations) -->
