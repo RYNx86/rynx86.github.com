@@ -1,41 +1,161 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RYNx86</title>
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#090909;color:#eee;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;background:
-linear-gradient(rgba(255,0,40,.08) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,0,40,.08) 1px,transparent 1px);
-background-size:40px 40px;animation:move 18s linear infinite;pointer-events:none}
-@keyframes move{to{transform:translate(40px,40px)}}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center}
-h1{font-size:4rem;margin:.2em 0}.accent{color:#ff3b4d}
-.card{max-width:900px;background:rgba(255,255,255,.04);backdrop-filter:blur(8px);padding:2rem;border:1px solid #333;border-radius:18px}
-.socials a{display:inline-block;margin:.4rem;padding:.8rem 1.1rem;border:1px solid #ff3b4d;border-radius:10px;color:#fff;text-decoration:none;transition:.25s}
-.socials a:hover{background:#ff3b4d;transform:translateY(-3px)}
-.sec{max-width:1000px;margin:60px auto;padding:1rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.item{padding:1rem;border:1px solid #333;border-radius:14px;background:#111}
-.cursor{position:fixed;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,59,77,.18),transparent 70%);pointer-events:none;transform:translate(-50%,-50%)}
-</style></head>
-<body><div class="cursor" id=c></div>
-<section class="hero"><div class="card">
-<div>STUDENT • GAME DEVELOPER • WEB DEVELOPER</div>
-<h1>Hi, I'm <span class="accent">RYNx86</span></h1>
-<p id=t></p>
-<div class="socials">
-<a href="https://github.com/RYNx86" target="_blank" rel="noopener noreferrer">GitHub</a>
-<a href="https://instagram.com/_rayyanamer" target="_blank" rel="noopener noreferrer">Instagram</a>
-<a href="https://youtube.com/@RYNx86-Dev" target="_blank" rel="noopener noreferrer">YouTube</a>
-<a href="https://rynx86.itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>
-</div></div></section>
-<section class="sec"><h2>Projects</h2><div class="grid">
-<div class=item><h3>Yamiori</h3><p>PSX-inspired horror experience.</p></div>
-<div class=item><h3>Rebzilated Studio</h3><p>Indie games and experiments.</p></div>
-<div class=item><h3>Web Experiments</h3><p>Creative HTML/CSS/JS projects.</p></div>
-</div></section>
-<script>
-const txt="A student from Pakistan passionate about game development, web technologies and interactive experiences.";
-let i=0;function type(){if(i<txt.length){t.textContent+=txt[i++];setTimeout(type,25)}}type();
-addEventListener("mousemove",e=>{c.style.left=e.clientX+"px";c.style.top=e.clientY+"px";});
-</script></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RYNx86</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #090909;
+            color: #eee;
+            overflow-x: hidden;
+        }
+        body:before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: 
+                linear-gradient(rgba(255, 0, 40, .08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 40, .08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: move 18s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes move {
+            to { transform: translate(40px, 40px); }
+        }
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4rem;
+            margin: .2em 0;
+        }
+        .accent {
+            color: #ff3b4d;
+        }
+        .card {
+            max-width: 900px;
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(8px);
+            padding: 2rem;
+            border: 1px solid #333;
+            border-radius: 18px;
+        }
+        .socials a {
+            display: inline-block;
+            margin: .4rem;
+            padding: .8rem 1.1rem;
+            border: 1px solid #ff3b4d;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: .25s;
+        }
+        .socials a:hover {
+            background: #ff3b4d;
+            transform: translateY(-3px);
+        }
+        .sec {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 1.5rem;
+        }
+        .bio-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #ccc;
+            background: rgba(255, 255, 255, .02);
+            padding: 1.5rem;
+            border-radius: 14px;
+            border-left: 4px solid #ff3b4d;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+        .item {
+            padding: 1rem;
+            border: 1px solid #333;
+            border-radius: 14px;
+            background: #111;
+        }
+        /* Music Widget Styling */
+        .music-container {
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #333;
+            background: #111;
+        }
+        .music-container iframe {
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="card">
+            <div>STUDENT • GAME DEVELOPER • WEB DEVELOPER</div>
+            <h1>Hi, I'm <span class="accent">RYNx86</span></h1>
+            <div class="socials">
+                <a href="https://github.com/RYNx86" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://instagram.com/_rayyanamer" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://youtube.com/@RYNx86-Dev" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://rynx86.itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec">
+        <h2>About Me</h2>
+        <div class="bio-text">
+            A student from Pakistan passionate about game development, web technologies, and interactive experiences.
+        </div>
+    </section>
+
+    <section class="sec">
+        <h2>What I'm Listening To</h2>
+        <div class="music-container">
+            <!-- Replace the URL inside src="..." with your own Spotify playlist, album, or track embed link -->
+            <iframe 
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DX8Ueb7vEAqPV?utm_source=generator&theme=0" 
+                width="100%" 
+                height="152" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <section class="sec">
+        <h2>Projects</h2>
+        <div class="grid">
+            <div class="item">
+                <h3>Yamiori</h3>
+                <p>PSX-inspired horror experience.</p>
+            </div>
+            <div class="item">
+                <h3>Rebzilated Studio</h3>
+                <p>Indie games and experiments.</p>
+            </div>
+            <div class="item">
+                <h3>Web Experiments</h3>
+                <p>Creative HTML/CSS/JS projects.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
