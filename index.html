@@ -2,273 +2,245 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RYNx86</title>
-    <style>
-        :root {
-            --bg: #060608;
-            --accent: #ff3b4d;
-            --accent-glow: rgba(255, 59, 77, 0.15);
-            --card-bg: rgba(14, 14, 18, 0.6);
-            --border: rgba(255, 255, 255, 0.06);
-            --text-main: #eeeeee;
-            --text-muted: #a0a0a5;
-        }
-
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text-main);
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Optimized Grid Background */
-        body:before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: 
-                linear-gradient(var(--accent-glow) 1px, transparent 1px),
-                linear-gradient(90deg, var(--accent-glow) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Subtle Animated Geometric Shapes */
-        .shape {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(90px);
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: 0;
-            animation: float 20s ease-in-out infinite alternate;
-        }
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent);
-            top: -10%;
-            left: -10%;
-        }
-        .shape-2 {
-            width: 500px;
-            height: 500px;
-            background: #4d12ff;
-            bottom: -15%;
-            right: -10%;
-            animation-delay: -5s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 60px) scale(1.1); }
-        }
-
-        /* Layout Content Wrapper */
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        /* Hero Container */
-        .hero {
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            padding: 4rem 0 2rem 0;
-        }
-
-        .hero-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 3rem 2.5rem;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .tagline {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin: 0 0 1.5rem 0;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .accent {
-            color: var(--accent);
-            text-shadow: 0 0 30px var(--accent-glow);
-        }
-
-        /* Navigation / Social Links */
-        .socials {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .socials a {
-            padding: 0.7rem 1.3rem;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .socials a:hover {
-            border-color: var(--accent);
-            background: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--accent-glow);
-        }
-
-        /* Sections Structure */
-        .sec {
-            margin-top: 4rem;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        h2::before {
-            content: "";
-            display: inline-block;
-            width: 4px;
-            height: 1.2rem;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        /* About Text Styling */
-        .bio-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 2rem;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 1.15rem;
-            line-height: 1.6;
-            color: #d1d1d6;
-        }
-
-        /* Grid System for Projects */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .item {
-            padding: 1.75rem;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .item:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 59, 77, 0.3);
-        }
-
-        .item h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.25rem;
-        }
-
-        .item p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .hero-card { padding: 2rem 1.5rem; }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rayyan Amer — Portfolio Board</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lucide Icons Script (Serves as our icon font library) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- External CSS Link -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Ambient Glow Shapes -->
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
+    <!-- BACKGROUND VECTOR DOODLES -->
+    <svg class="doodle doodle-coffee" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40"/>
+        <path d="M 50 10 C 65 10, 85 25, 85 50 C 85 75, 65 90, 50 90" stroke-dasharray="6 3"/>
+    </svg>
 
-    <div class="container">
+    <svg class="doodle doodle-star" style="top: 28%; right: 4%; transform: rotate(15deg);" viewBox="0 0 24 24">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+    </svg>
+
+    <svg class="doodle doodle-arrow" style="top: 50%; left: 2%; transform: rotate(-10deg);" viewBox="0 0 60 40">
+        <path d="M 10 30 Q 30 10 50 25 M 50 25 L 40 18 M 50 25 L 44 32"/>
+    </svg>
+
+    <svg class="doodle doodle-bulb" style="top: 72%; right: 10%; transform: rotate(-20deg);" viewBox="0 0 24 24">
+        <path d="M9 21h6M12 2a7 7 0 0 0-7 7c0 2.4 1.2 4.5 3 5.8V18h8v-3.2c1.8-1.3 3-3.4 3-5.8a7 7 0 0 0-7-7z"/>
+    </svg>
+
+    <div class="board">
         
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-card">
-                <div class="tagline">STUDENT • GAME DEVELOPER • WEB DEVELOPER</div>
-                <h1>Hi, I'm <span class="accent">RYNx86</span></h1>
-                <div class="socials">
-                    <a href="https://github.com/RYNx86" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://instagram.com/_rayyanamer" target="_blank" rel="noopener noreferrer">Instagram</a>
-                    <a href="https://youtube.com/@RYNx86-Dev" target="_blank" rel="noopener noreferrer">YouTube</a>
-                    <a href="https://rynx86.itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>
-                </div>
-            </div>
-        </section>
+        <!-- Pinned Header Note -->
+        <header class="note hero board-item-1" tabindex="0">
+            <div class="pin" style="background-color: var(--red);"></div>
+            <p class="eyebrow"><i data-lucide="layout-dashboard"></i> // workspace.board</p>
+            <h1>Hi, I'm <span class="highlight">Rayyan Amer</span> <i data-lucide="terminal"></i></h1>
+            <p class="tagline">Indie game developer, pre-engineering student from Pakistan, and physical computing hobbyist. Currently building worlds in Godot and tinkering with ESP32 microcontrollers.</p>
+        </header>
 
-        <!-- About Me Section -->
-        <section class="sec">
+        <!-- Pinned About Note -->
+        <section class="note about board-item-2" tabindex="0">
+            <div class="pin" style="background-color: var(--teal);"></div>
             <h2>About Me</h2>
-            <div class="bio-card">
-                A student from Pakistan passionate about game development, web technologies, and crafting deeply immersive interactive experiences.
+            <p>I build cozy interactive games and play with mechatronics. When I'm not studying for my intermediate pre-engineering, I am either deep in GDScript or writing C++ firmware to make physical hardware move.</p>
+            <div class="tags">
+                <span class="tape">Godot Engine</span>
+                <span class="tape">GDScript</span>
+                <span class="tape">ESP32</span>
+                <span class="tape">C++</span>
+                <span class="tape">Mechatronics</span>
             </div>
         </section>
 
-        <!-- Projects Grid Section -->
-        <section class="sec">
-            <h2>Projects</h2>
-            <div class="grid">
-                <div class="item">
-                    <h3>Yamiori</h3>
-                    <p>A PSX-inspired psychological horror experience.</p>
+        <!-- Project Sticker 1 -->
+        <a class="sticker board-item-3" href="https://rynx86.itch.io" target="_blank" rel="noopener">
+            <div class="photo" style="--c1:#478cbf; --c2:#1d3d57;"><i data-lucide="gamepad-2"></i></div>
+            <h3>My Games</h3>
+            <p>Check out my game creations, game-jam entries, and prototypes built with the Godot engine.</p>
+            <div class="tags">
+                <span class="stamp">Godot</span>
+                <span class="stamp">Itch.io</span>
+            </div>
+            <span class="go">play on itch.io →</span>
+        </a>
+
+        <!-- Project Sticker 2 -->
+        <a class="sticker board-item-4" href="https://rynx86.github.io" target="_blank" rel="noopener">
+            <div class="photo" style="--c1:#e05b49; --c2:#6a1f15;"><i data-lucide="cpu"></i></div>
+            <h3>Hardware Tinkering</h3>
+            <p>My mechatronics experiments, ESP32 automation chips, and code-meets-circuits builds.</p>
+            <div class="tags">
+                <span class="stamp">ESP32</span>
+                <span class="stamp">IoT</span>
+                <span class="stamp">C++</span>
+            </div>
+            <span class="go">view hardware projects →</span>
+        </a>
+
+        <!-- Project Sticker 3 -->
+        <a class="sticker board-item-5" href="https://github.com/rynx86" target="_blank" rel="noopener">
+            <div class="photo" style="--c1:#2fa572; --c2:#114d33;"><i data-lucide="git-branch"></i></div>
+            <h3>Open Source</h3>
+            <p>Host of my open source experiments, web prototypes, and game scripts on GitHub.</p>
+            <div class="tags">
+                <span class="stamp">GitHub</span>
+                <span class="stamp">Web</span>
+            </div>
+            <span class="go">explore repositories →</span>
+        </a>
+
+        <!-- Project Sticker 4 -->
+        <a class="sticker board-item-6" href="https://Youtube.com/@RYNx86-Dev" target="_blank" rel="noopener">
+            <div class="photo" style="--c1:#ff4a4a; --c2:#801414;"><i data-lucide="youtube"></i></div>
+            <h3>Devlogs & Guides</h3>
+            <p>Where I share my development processes, electronics tutorials, and indie game updates.</p>
+            <div class="tags">
+                <span class="stamp">YouTube</span>
+                <span class="stamp">Devlog</span>
+            </div>
+            <span class="go">watch channel →</span>
+        </a>
+
+        <!-- Social Stickers Grid -->
+        <div class="socials-row board-item-7">
+            <a class="stamp-card" href="https://rynx86.github.io" target="_blank" rel="noopener" aria-label="Portfolio">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/>
+                </svg>
+                <span>portfolio</span>
+            </a>
+            
+            <a class="stamp-card" href="https://rynx86.itch.io" target="_blank" rel="noopener" aria-label="Itch.io">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
+                    <path d="M6 12h4m-2-2v4m7-2h.01M18 12h.01"/>
+                </svg>
+                <span>itch.io</span>
+            </a>
+            
+            <a class="stamp-card" href="https://Youtube.com/@RYNx86-Dev" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                </svg>
+                <span>youtube</span>
+            </a>
+            
+            <a class="stamp-card" href="https://Instagram.com/_rayyanamer" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+                <span>instagram</span>
+            </a>
+        </div>
+
+        <!-- GAMING CARD -->
+        <div class="gaming-card board-item-gaming">
+            <div class="gaming-title">
+                <div class="d-pad"></div>
+                I Game A Bit... <i data-lucide="swords"></i>
+            </div>
+            <div class="gaming-screen">
+                <div class="gaming-screen-title"><i data-lucide="play"></i> Active Playlog</div>
+                <div class="gaming-stat-row">
+                    <span>> Assetto Corsa</span>
+                    <span style="color: var(--red);">[DRIVING]</span>
                 </div>
-                <div class="item">
-                    <h3>Rebzilated Studio</h3>
-                    <p>Independent game titles, assets, and engine experiments.</p>
+                <div class="gaming-stat-row">
+                    <span>> Minecraft Voxel</span>
+                    <span style="color: var(--teal);">[CREATIVE]</span>
                 </div>
-                <div class="item">
-                    <h3>Web Experiments</h3>
-                    <p>Creative frontend interfaces built using HTML, CSS, and modern JavaScript.</p>
+                <div class="gaming-stat-row">
+                    <span>> Voices of Void</span>
+                    <span style="color: #444;">[SURVIVAL]</span>
                 </div>
             </div>
-        </section>
+            <div class="buttons-row">
+                <div class="btn-game"></div>
+                <div class="btn-game" style="background-color: var(--yellow);"></div>
+            </div>
+        </div>
 
+        <!-- PHOTO GALLERY BOARDS -->
+        <div class="gallery-photo board-item-gallery-1">
+            <div class="photo-frame photo-random-1"></div>
+            <div class="photo-frame-caption"><i data-lucide="camera"></i> random things</div>
+            <div class="polaroid-caption">Coding till 3 AM ☕</div>
+        </div>
+
+        <div class="gallery-photo board-item-gallery-2">
+            <div class="photo-frame photo-random-2"></div>
+            <div class="photo-frame-caption"><i data-lucide="aperture"></i> snap logs</div>
+            <div class="polaroid-caption">Tinkering with wires ⚡</div>
+        </div>
+
+        <div class="gallery-photo board-item-gallery-3">
+            <div class="photo-frame photo-random-3"></div>
+            <div class="photo-frame-caption"><i data-lucide="image"></i> capture</div>
+            <div class="polaroid-caption">Staring at bug #242 🐛</div>
+        </div>
+
+        <!-- RETRO ITEM 1: Polaroid Setup -->
+        <div class="polaroid board-item-polaroid">
+            <div class="polaroid-photo">
+                <div>i5-4590 @ 3.30GHz</div>
+                <div>Intel HD Graphics</div>
+                <div>8GB DDR3 RAM</div>
+                <div class="cpu-spec">POTATO ENGINE <i data-lucide="hard-drive"></i></div>
+            </div>
+            <div class="polaroid-caption">My Humble Workstation</div>
+        </div>
+
+        <!-- RETRO ITEM 2: Cassette Player (Music) -->
+        <div class="cassette-player board-item-music">
+            <div class="cassette-label">
+                <span>Side A</span>
+                <span>Stereo</span>
+            </div>
+            <div class="cassette-reels">
+                <div class="reel"></div>
+                <div class="reel"></div>
+            </div>
+            <div class="cassette-info-row">
+                <div class="cassette-meta">
+                    <div class="cassette-title">Sweater Weather</div>
+                    <div class="cassette-artist">The Neighborhood</div>
+                </div>
+                <a class="spotify-btn" href="https://open.spotify.com/track/2QjOHCTQ1Jl3zawyYOpxh6?si=2tW_5fMNRPGvNWJfxkAlWw&utm_source=copy-link" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- RETRO ITEM 3: Retro Game Cartridge (Inspirations) -->
+        <div class="game-cartridge board-item-cartridge">
+            <div class="cartridge-label">
+                <div class="cartridge-title"><i data-lucide="disc"></i> FAVORITE GAMES</div>
+                <div class="cartridge-list">
+                    <span><i data-lucide="star"></i> GTA San Andreas</span>
+                    <span><i data-lucide="star"></i> Minecraft</span>
+                    <span><i data-lucide="star"></i> Voices of the Void</span>
+                    <span><i data-lucide="star"></i> Assetto Corsa</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pinned Footnote Note -->
+        <footer class="note footnote board-item-8">
+            <div class="pin" style="background-color: var(--yellow); top: -8px;"></div>
+            made with <i data-lucide="heart"></i> & code · rayyan amer · pakistan · 2026
+        </footer>
     </div>
 
+    <!-- External JavaScript Link -->
+    <script src="script.js"></script>
 </body>
 </html>
