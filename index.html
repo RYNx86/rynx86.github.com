@@ -5,156 +5,270 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RYNx86</title>
     <style>
+        :root {
+            --bg: #060608;
+            --accent: #ff3b4d;
+            --accent-glow: rgba(255, 59, 77, 0.15);
+            --card-bg: rgba(14, 14, 18, 0.6);
+            --border: rgba(255, 255, 255, 0.06);
+            --text-main: #eeeeee;
+            --text-muted: #a0a0a5;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #090909;
-            color: #eee;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
             overflow-x: hidden;
+            position: relative;
         }
+
+        /* Optimized Grid Background */
         body:before {
             content: "";
             position: fixed;
             inset: 0;
             background: 
-                linear-gradient(rgba(255, 0, 40, .08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 40, .08) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: move 18s linear infinite;
+                linear-gradient(var(--accent-glow) 1px, transparent 1px),
+                linear-gradient(90deg, var(--accent-glow) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.4;
             pointer-events: none;
+            z-index: 0;
         }
-        @keyframes move {
-            to { transform: translate(40px, 40px); }
+
+        /* Subtle Animated Geometric Shapes */
+        .shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite alternate;
         }
-        .hero {
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -10%;
+            left: -10%;
         }
-        h1 {
-            font-size: 4rem;
-            margin: .2em 0;
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: #4d12ff;
+            bottom: -15%;
+            right: -10%;
+            animation-delay: -5s;
         }
-        .accent {
-            color: #ff3b4d;
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 60px) scale(1.1); }
         }
-        .card {
+
+        /* Layout Content Wrapper */
+        .container {
+            position: relative;
+            z-index: 1;
             max-width: 900px;
-            background: rgba(255, 255, 255, .04);
-            backdrop-filter: blur(8px);
-            padding: 2rem;
-            border: 1px solid #333;
-            border-radius: 18px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
         }
+
+        /* Hero Container */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0 2rem 0;
+        }
+
+        .hero-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .tagline {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0 0 1.5rem 0;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .accent {
+            color: var(--accent);
+            text-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* Navigation / Social Links */
+        .socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
         .socials a {
-            display: inline-block;
-            margin: .4rem;
-            padding: .8rem 1.1rem;
-            border: 1px solid #ff3b4d;
-            border-radius: 10px;
-            color: #fff;
+            padding: 0.7rem 1.3rem;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            color: var(--text-main);
             text-decoration: none;
-            transition: .25s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
+
         .socials a:hover {
-            background: #ff3b4d;
-            transform: translateY(-3px);
+            border-color: var(--accent);
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--accent-glow);
         }
+
+        /* Sections Structure */
         .sec {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 1.5rem;
+            margin-top: 4rem;
         }
-        .bio-text {
-            font-size: 1.25rem;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 1.2rem;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* About Text Styling */
+        .bio-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 1.15rem;
             line-height: 1.6;
-            color: #ccc;
-            background: rgba(255, 255, 255, .02);
-            padding: 1.5rem;
-            border-radius: 14px;
-            border-left: 4px solid #ff3b4d;
+            color: #d1d1d6;
         }
+
+        /* Grid System for Projects */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
         }
+
         .item {
-            padding: 1rem;
-            border: 1px solid #333;
-            border-radius: 14px;
-            background: #111;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        /* Music Widget Styling */
-        .music-container {
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid #333;
-            background: #111;
+
+        .item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 59, 77, 0.3);
         }
-        .music-container iframe {
-            border: none;
-            display: block;
+
+        .item h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        .item p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .hero-card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <div class="card">
-            <div>STUDENT • GAME DEVELOPER • WEB DEVELOPER</div>
-            <h1>Hi, I'm <span class="accent">RYNx86</span></h1>
-            <div class="socials">
-                <a href="https://github.com/RYNx86" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://instagram.com/_rayyanamer" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a href="https://youtube.com/@RYNx86-Dev" target="_blank" rel="noopener noreferrer">YouTube</a>
-                <a href="https://rynx86.itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>
-            </div>
-        </div>
-    </section>
+    <!-- Ambient Glow Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
 
-    <section class="sec">
-        <h2>About Me</h2>
-        <div class="bio-text">
-            A student from Pakistan passionate about game development, web technologies, and interactive experiences.
-        </div>
-    </section>
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-card">
+                <div class="tagline">STUDENT • GAME DEVELOPER • WEB DEVELOPER</div>
+                <h1>Hi, I'm <span class="accent">RYNx86</span></h1>
+                <div class="socials">
+                    <a href="https://github.com/RYNx86" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://instagram.com/_rayyanamer" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://youtube.com/@RYNx86-Dev" target="_blank" rel="noopener noreferrer">YouTube</a>
+                    <a href="https://rynx86.itch.io" target="_blank" rel="noopener noreferrer">itch.io</a>
+                </div>
+            </div>
+        </section>
 
-    <section class="sec">
-        <h2>What I'm Listening To</h2>
-        <div class="music-container">
-            <iframe 
-                src="https://open.spotify.com/track/4EWBhKf1fOFnyMtUzACXEc?si=79iiGygKSFq_zaI85NvVdQ&utm_source=copy-link&context=spotify%3Atrack%3A4EWBhKf1fOFnyMtUzACXEc" 
-                width="100%" 
-                height="152" 
-                allowfullscreen="" 
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                loading="lazy">
-            </iframe>
-        </div>
-    </section>
+        <!-- About Me Section -->
+        <section class="sec">
+            <h2>About Me</h2>
+            <div class="bio-card">
+                A student from Pakistan passionate about game development, web technologies, and crafting deeply immersive interactive experiences.
+            </div>
+        </section>
 
-    <section class="sec">
-        <h2>Projects</h2>
-        <div class="grid">
-            <div class="item">
-                <h3>Yamiori</h3>
-                <p>PSX-inspired horror experience.</p>
+        <!-- Projects Grid Section -->
+        <section class="sec">
+            <h2>Projects</h2>
+            <div class="grid">
+                <div class="item">
+                    <h3>Yamiori</h3>
+                    <p>A PSX-inspired psychological horror experience.</p>
+                </div>
+                <div class="item">
+                    <h3>Rebzilated Studio</h3>
+                    <p>Independent game titles, assets, and engine experiments.</p>
+                </div>
+                <div class="item">
+                    <h3>Web Experiments</h3>
+                    <p>Creative frontend interfaces built using HTML, CSS, and modern JavaScript.</p>
+                </div>
             </div>
-            <div class="item">
-                <h3>Rebzilated Studio</h3>
-                <p>Indie games and experiments.</p>
-            </div>
-            <div class="item">
-                <h3>Web Experiments</h3>
-                <p>Creative HTML/CSS/JS projects.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+
+    </div>
 
 </body>
 </html>
