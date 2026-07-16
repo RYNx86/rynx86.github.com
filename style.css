@@ -1,0 +1,852 @@
+:root {
+    --cork-a: #4d6652;
+    --cork-b: #384d3c;
+    --paper-yellow: #fff9d1;
+    --paper-blue: #e3f2fd;
+    --paper-white: #ffffff;
+    --ink: #1f1b16;
+    --ink-soft: #544b3f;
+    --red: #df5444;       
+    --teal: #3b8a82;      
+    --yellow: #ecd16d;    
+    --tag-bg: #e2ede4;
+    --tag-text: #223c27;
+    --shadow-flat: 0 2px 4px rgba(0,0,0,0.15);
+    --shadow-sticker: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+    --shadow-note: 0 8px 16px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cork-a: #1c291f;
+        --cork-b: #131b14;
+        --paper-yellow: #28261e;
+        --paper-blue: #1c2229;
+        --paper-white: #1c1a17;
+        --ink: #f0e6df;
+        --ink-soft: #bfaea2;
+        --red: #ff604d;       
+        --teal: #50b3a9;      
+        --yellow: #ffd95c;    
+        --tag-bg: #2d3b30;
+        --tag-text: #a8cfae;
+        --shadow-flat: 0 2px 4px rgba(0,0,0,0.3);
+        --shadow-sticker: 0 4px 10px rgba(0,0,0,0.4);
+        --shadow-note: 0 10px 20px rgba(0,0,0,0.5);
+    }
+}
+
+* { box-sizing: border-box; }
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--cork-a);
+    background-image: 
+        radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.4px), 
+        radial-gradient(rgba(0,0,0,0.15) 1.2px, transparent 1.6px), 
+        linear-gradient(160deg, var(--cork-a), var(--cork-b));
+    background-size: 8px 8px, 12px 12px, 100% 100%;
+    background-position: 0 0, 4px 6px, 0 0;
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
+}
+::selection { background: var(--yellow); color: #120e0a; }
+a { color: inherit; text-decoration: none; }
+
+/* Board Container - Dynamic flow */
+.board {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    z-index: 5;
+}
+
+/* Base element transitions */
+.note, .sticker, .stamp-card, .retro-item, .polaroid, .gaming-card, .gallery-photo {
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, z-index 0.1s ease;
+}
+
+/* Interactive Pinned Notes */
+.note {
+    position: relative;
+    width: 100%;
+    box-shadow: var(--shadow-note);
+    border-radius: 2px;
+}
+.note:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+    z-index: 50;
+}
+
+.pin {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background-color: var(--red);
+    border-radius: 50%;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+.pin::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    width: 2px;
+    height: 10px;
+    background: #ccc;
+    transform: rotate(15deg);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.hero {
+    padding: 35px 24px 26px;
+    background: var(--paper-blue);
+    transform: rotate(-1.5deg);
+}
+
+.about {
+    padding: 35px 24px 26px;
+    background: var(--paper-yellow);
+    transform: rotate(1.8deg);
+}
+
+.eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--teal);
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.eyebrow i { width: 12px; height: 12px; }
+
+.hero h1 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 1.05;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.hero h1 i { width: 28px; height: 28px; stroke-width: 2.5; color: var(--teal); }
+.hero h1 .highlight { color: var(--red); }
+
+.tagline {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+
+.about h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
+    margin: 0 0 8px;
+    color: var(--ink);
+}
+.about p {
+    margin: 0 0 14px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+/* Stickers Style */
+.sticker {
+    position: relative;
+    width: 100%;
+    background: var(--paper-white);
+    border: 4px solid var(--paper-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sticker);
+    padding: 16px;
+    display: block;
+}
+.sticker:nth-of-type(odd) { transform: rotate(-2deg); }
+.sticker:nth-of-type(even) { transform: rotate(2deg); }
+
+.sticker:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.22);
+    z-index: 50;
+}
+
+.photo {
+    height: 110px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    color: #fff;
+}
+.photo i { width: 40px; height: 40px; stroke-width: 1.8; }
+
+.sticker h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin: 0 0 4px;
+    color: var(--ink);
+}
+.sticker p {
+    margin: 0 0 12px;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tape {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    padding: 4px 8px;
+    background: rgba(232,193,92,0.35);
+    border: 1px dashed rgba(0,0,0,0.15);
+    color: var(--ink);
+    transform: rotate(-1deg);
+}
+
+.stamp {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    margin: 0 4px 4px 0;
+    background-color: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 20px;
+}
+
+.go {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--teal);
+    font-weight: 600;
+}
+
+/* Social Stickers Row */
+.socials-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+}
+.stamp-card {
+    width: calc(50% - 6px);
+    background: var(--paper-white);
+    border: 3px solid var(--paper-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sticker);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 6px;
+}
+.stamp-card:nth-child(1) { transform: rotate(-2.5deg); }
+.stamp-card:nth-child(2) { transform: rotate(1.8deg); }
+.stamp-card:nth-child(3) { transform: rotate(2deg); }
+.stamp-card:nth-child(4) { transform: rotate(-1.5deg); }
+
+.stamp-card:hover {
+    transform: scale(1.06) rotate(0deg) !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    z-index: 50;
+}
+
+.stamp-card svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--ink);
+    transition: stroke 0.2s ease;
+}
+.stamp-card span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+}
+.stamp-card:hover svg { stroke: var(--red); }
+
+.footnote {
+    width: 100%;
+    padding: 14px;
+    background: var(--paper-yellow);
+    box-shadow: var(--shadow-note);
+    border-radius: 2px;
+    transform: rotate(0.5deg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.footnote i { width: 12px; height: 12px; color: var(--red); fill: var(--red); }
+
+/* Polaroid Setup Shot */
+.polaroid {
+    background: #fbfbf7;
+    padding: 12px 12px 28px 12px;
+    border-radius: 3px;
+    box-shadow: var(--shadow-note);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+.polaroid:hover {
+    transform: scale(1.05) rotate(1deg) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    z-index: 52;
+}
+.polaroid-photo {
+    width: 100%;
+    height: 180px;
+    background: #111;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #4df3a9;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+.polaroid:hover .polaroid-photo {
+    background: #080808;
+}
+.polaroid-photo::before {
+    content: "SYSTEM STATS";
+    position: absolute;
+    top: 10px;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: #666;
+    transition: color 0.3s ease;
+}
+.polaroid:hover .polaroid-photo::before {
+    color: #4df3a9;
+    text-shadow: 0 0 5px rgba(77, 243, 169, 0.5);
+}
+.polaroid-photo::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 4px, 6px 100%;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.polaroid:hover .polaroid-photo::after {
+    opacity: 0.8;
+    animation: scanline 8s linear infinite;
+}
+.polaroid-photo .cpu-spec {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    text-shadow: 0 0 2px rgba(255,255,255,0.2);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.polaroid-photo .cpu-spec i { width: 18px; height: 18px; }
+.polaroid:hover .polaroid-photo .cpu-spec {
+    color: #ffd95c;
+    text-shadow: 0 0 8px rgba(255, 217, 92, 0.6);
+}
+.polaroid-caption {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #3b3028;
+    margin-top: 14px;
+    text-align: center;
+}
+@keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+@media (prefers-color-scheme: dark) {
+    .polaroid { background: #efebe4; }
+    .polaroid-caption { color: #1a1512; }
+}
+
+/* Cassette Walkman Playback widget */
+.cassette-player {
+    background: #2b323c;
+    border: 4px solid #1a1e24;
+    border-radius: 8px;
+    padding: 16px;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    box-shadow: var(--shadow-sticker);
+    width: 100%;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.cassette-player:hover {
+    transform: scale(1.04) rotate(-1deg) !important;
+    background-color: #323a46;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    z-index: 52;
+}
+.cassette-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: #a8b2c1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.cassette-reels {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: #15181d;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #3d4654;
+}
+.reel {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 4px dashed #478cbf;
+    background: #252a33;
+    transition: border-color 0.3s ease;
+}
+.cassette-player:hover .reel {
+    animation: spin 2.5s linear infinite;
+    border-color: #ecd16d;
+}
+.cassette-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.cassette-meta {
+    flex-grow: 1;
+    min-width: 0;
+}
+.cassette-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #ecd16d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s ease;
+}
+.cassette-player:hover .cassette-title {
+    color: #fff;
+}
+.cassette-artist {
+    font-size: 0.75rem;
+    color: #a8b2c1;
+}
+.spotify-btn {
+    background: #1DB954;
+    color: #fff;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.spotify-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+}
+.spotify-btn:hover {
+    transform: scale(1.15);
+    background-color: #1ed760;
+    box-shadow: 0 4px 12px rgba(29, 185, 84, 0.4);
+}
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Game Cartridge */
+.game-cartridge {
+    background: #e05b49;
+    border-top: 15px solid #bd4131;
+    border-left: 5px solid #e05b49;
+    border-right: 5px solid #e05b49;
+    border-radius: 6px;
+    box-shadow: var(--shadow-sticker);
+    padding: 12px;
+    color: white;
+    width: 100%;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+.game-cartridge:hover {
+    transform: scale(1.05) rotate(-1.5deg) !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    z-index: 52;
+}
+.cartridge-label {
+    background: white;
+    color: black;
+    border-radius: 4px;
+    padding: 8px;
+    border: 2px solid #333;
+    text-align: center;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.game-cartridge:hover .cartridge-label {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.cartridge-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.cartridge-title i { width: 16px; height: 16px; }
+.cartridge-list {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #555;
+    text-align: left;
+    margin-top: 8px;
+    border-top: 1px dotted #ccc;
+    padding-top: 6px;
+}
+.cartridge-list span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s ease, color 0.2s ease;
+    margin-bottom: 2px;
+}
+.cartridge-list span i { width: 10px; height: 10px; }
+.game-cartridge:hover .cartridge-list span:nth-child(1) { transform: translateX(2px); color: #df5444; }
+.game-cartridge:hover .cartridge-list span:nth-child(2) { transform: translateX(2px); color: #3b8a82; }
+.game-cartridge:hover .cartridge-list span:nth-child(3) { transform: translateX(2px); color: #ecd16d; }
+.game-cartridge:hover .cartridge-list span:nth-child(4) { transform: translateX(2px); color: #478cbf; }
+
+/* Polaroid Scattered Gallery Photos */
+.gallery-photo {
+    background: #fbfbf7;
+    padding: 12px 12px 24px 12px;
+    border-radius: 3px;
+    box-shadow: var(--shadow-note);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.06);
+    transform: rotate(calc(var(--r, 0deg)));
+}
+.gallery-photo:hover {
+    transform: scale(1.04) rotate(0deg) !important;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.22);
+    z-index: 51;
+}
+
+.photo-frame {
+    width: 100%;
+    height: 160px;
+    background-color: #ddd;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.photo-random-1 {
+    background-image: radial-gradient(circle at 50% 50%, #478cbf 20%, transparent 20%),
+                      radial-gradient(circle at 0 0.5%, #e05b49 40%, transparent 40%),
+                      linear-gradient(45deg, #1d3d57, #6a1f15);
+}
+.photo-random-2 {
+    background-image: repeating-linear-gradient(45deg, #3b8a82, #3b8a82 10px, #22524d 10px, #22524d 20px);
+}
+.photo-random-3 {
+    background-image: radial-gradient(circle, var(--yellow) 10%, transparent 11%),
+                      radial-gradient(circle at bottom left, #df5444 30%, transparent 32%),
+                      linear-gradient(to bottom, #1f1b16, #4d6652);
+}
+
+.photo-frame-caption {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 6px;
+    border-radius: 3px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.photo-frame-caption i { width: 10px; height: 10px; }
+
+/* Handheld Retro Gaming card */
+.gaming-card {
+    background: #eedfae;
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    padding: 20px;
+    color: var(--ink);
+    box-shadow: var(--shadow-sticker);
+    position: relative;
+    overflow: hidden;
+}
+.gaming-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 8px;
+    background: var(--red);
+}
+.gaming-card:hover {
+    transform: scale(1.03) rotate(1.5deg) !important;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+    z-index: 50;
+}
+.gaming-title {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.gaming-title i { width: 24px; height: 24px; stroke-width: 2; }
+.d-pad {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    position: relative;
+    clip-path: polygon(33% 0%, 66% 0%, 66% 33%, 100% 33%, 100% 66%, 66% 66%, 66% 100%, 33% 100%, 33% 66%, 0% 66%, 0% 33%, 33% 33%);
+}
+.gaming-screen {
+    background: #8b956d; 
+    border: 3px solid var(--ink);
+    border-radius: 4px;
+    padding: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: #1f2413;
+    margin-bottom: 12px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+}
+.gaming-screen-title {
+    font-weight: bold;
+    border-bottom: 1px dashed #1f2413;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.gaming-screen-title i { width: 12px; height: 12px; }
+.gaming-stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+.buttons-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.btn-game {
+    width: 18px;
+    height: 18px;
+    background: var(--red);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    box-shadow: 0 2px 0 var(--ink);
+}
+
+/* Vector Doodles on Board */
+.doodle {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.25;
+    z-index: 1;
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.doodle-coffee {
+    top: 15%;
+    left: -40px;
+    width: 130px;
+    height: 130px;
+    stroke: rgba(120, 80, 40, 0.4);
+    stroke-width: 4;
+}
+.doodle-star { width: 40px; height: 40px; }
+.doodle-arrow { width: 60px; height: 40px; }
+.doodle-bulb { width: 45px; height: 45px; }
+
+@media (prefers-color-scheme: dark) {
+    .gallery-photo { background: #efebe4; }
+    .gallery-photo .polaroid-caption { color: #1a1512; }
+    .doodle { stroke: var(--paper-yellow); opacity: 0.15; }
+}
+
+/* DESKTOP GRID LAYOUT */
+@media (min-width: 1024px) {
+    .board {
+        max-width: 1180px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        padding: 60px 40px;
+        margin: 0 auto;
+        align-items: start;
+    }
+
+    .board-item-1 {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        transform: rotate(-1.5deg);
+    }
+    .board-item-2 {
+        grid-column: 1;
+        grid-row: 2;
+        transform: rotate(2deg);
+    }
+    .board-item-3 {
+        grid-column: 3;
+        grid-row: 1;
+        transform: rotate(2.5deg);
+        margin-top: 15px;
+    }
+    .board-item-4 {
+        grid-column: 2;
+        grid-row: 2;
+        transform: rotate(-2deg);
+        margin-top: -10px;
+    }
+    .board-item-5 {
+        grid-column: 3;
+        grid-row: 2;
+        transform: rotate(1.5deg);
+        margin-top: 10px;
+    }
+    .board-item-6 {
+        grid-column: 1;
+        grid-row: 3;
+        transform: rotate(-1deg);
+    }
+    .board-item-7 {
+        grid-column: 2;
+        grid-row: 3;
+        transform: rotate(1deg);
+        align-self: center;
+    }
+    .board-item-gallery-1 {
+        grid-column: 3;
+        grid-row: 3;
+        --r: -3deg;
+    }
+    .board-item-gaming {
+        grid-column: 1;
+        grid-row: 4;
+        transform: rotate(2deg);
+    }
+    .board-item-gallery-2 {
+        grid-column: 2;
+        grid-row: 4;
+        --r: 2deg;
+    }
+    .board-item-gallery-3 {
+        grid-column: 3;
+        grid-row: 4;
+        --r: -1.5deg;
+    }
+    .board-item-polaroid {
+        grid-column: 1;
+        grid-row: 5;
+        transform: rotate(-2.5deg);
+    }
+    .board-item-music {
+        grid-column: 2;
+        grid-row: 5;
+        transform: rotate(1.8deg);
+    }
+    .board-item-cartridge {
+        grid-column: 3;
+        grid-row: 5;
+        transform: rotate(-1.2deg);
+    }
+    .board-item-8 {
+        grid-column: 1 / 4;
+        grid-row: 6;
+        transform: rotate(-0.5deg);
+        margin-top: 20px;
+    }
+}
