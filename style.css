@@ -850,3 +850,114 @@ a { color: inherit; text-decoration: none; }
         margin-top: 20px;
     }
 }
+
+/* Cassette Walkman Playback widget */
+.cassette-player {
+    background: #2b323c;
+    border: 4px solid #1a1e24;
+    border-radius: 8px;
+    padding: 16px;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    box-shadow: var(--shadow-sticker);
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Natural CSS hover or active playing state keeps the card raised up */
+.cassette-player:hover, 
+.cassette-player.playing {
+    transform: scale(1.04) rotate(-1deg) !important;
+    background-color: #323a46;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    z-index: 52;
+}
+
+.cassette-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55rem;
+    color: #a8b2c1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+.cassette-reels {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: #15181d;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    border: 1px solid #3d4654;
+}
+.reel {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 4px dashed #478cbf;
+    background: #252a33;
+    transition: border-color 0.3s ease;
+}
+
+/* Reels spin when the parent has the playing class */
+.cassette-player.playing .reel {
+    animation: spin 2.5s linear infinite;
+    border-color: #ecd16d;
+}
+
+.cassette-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.cassette-meta {
+    flex-grow: 1;
+    min-width: 0;
+}
+.cassette-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #ecd16d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s ease;
+}
+.cassette-player:hover .cassette-title,
+.cassette-player.playing .cassette-title {
+    color: #fff;
+}
+.cassette-artist {
+    font-size: 0.75rem;
+    color: #a8b2c1;
+}
+
+.cassette-icon-state {
+    color: #a8b2c1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cassette-icon-state i {
+    width: 18px;
+    height: 18px;
+    transition: color 0.2s ease;
+}
+.cassette-player.playing .cassette-icon-state i {
+    color: #1DB954;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
