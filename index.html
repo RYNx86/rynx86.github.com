@@ -3,244 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rayyan Amer — Portfolio Board</title>
-    <!-- Fonts -->
+    <title>Rayyan Amer // Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Lucide Icons Script (Serves as our icon font library) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- External CSS Link -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Share+Tech+Mono&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-<body>
+<body class="text-zinc-400 min-h-screen p-4 md:p-8 relative selection:bg-zinc-700 selection:text-white">
 
-    <!-- BACKGROUND VECTOR DOODLES -->
-    <svg class="doodle doodle-coffee" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="40"/>
-        <path d="M 50 10 C 65 10, 85 25, 85 50 C 85 75, 65 90, 50 90" stroke-dasharray="6 3"/>
-    </svg>
-
-    <svg class="doodle doodle-star" style="top: 28%; right: 4%; transform: rotate(15deg);" viewBox="0 0 24 24">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-    </svg>
-
-    <svg class="doodle doodle-arrow" style="top: 50%; left: 2%; transform: rotate(-10deg);" viewBox="0 0 60 40">
-        <path d="M 10 30 Q 30 10 50 25 M 50 25 L 40 18 M 50 25 L 44 32"/>
-    </svg>
-
-    <svg class="doodle doodle-bulb" style="top: 72%; right: 10%; transform: rotate(-20deg);" viewBox="0 0 24 24">
-        <path d="M9 21h6M12 2a7 7 0 0 0-7 7c0 2.4 1.2 4.5 3 5.8V18h8v-3.2c1.8-1.3 3-3.4 3-5.8a7 7 0 0 0-7-7z"/>
-    </svg>
-
-    <div class="board">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 pt-4">
         
-        <!-- Pinned Header Note -->
-        <header class="note hero board-item-1" tabindex="0">
-            <div class="pin" style="background-color: var(--red);"></div>
-            <p class="eyebrow"><i data-lucide="layout-dashboard"></i> // workspace.board</p>
-            <h1>Hi, I'm <span class="highlight">Rayyan Amer</span> <i data-lucide="terminal"></i></h1>
-            <p class="tagline">Indie game developer, pre-engineering student from Pakistan, and physical computing hobbyist. Currently building worlds in Godot and tinkering with ESP32 microcontrollers.</p>
+        <header class="window-box tilt-left md:col-span-8 bg-zinc-900/90 border-2 border-zinc-800 shadow-xl rounded-xl p-6 relative flex flex-col justify-between hover:border-indigo-500/30">
+            <div class="flex items-center justify-between border-b border-zinc-850 pb-3 mb-6 bg-zinc-950/80 px-4 -mx-6 -mt-6 rounded-t-xl">
+                <span class="text-xs font-bold text-zinc-500 font-mono-clean flex items-center gap-2"><i class="fa-solid fa-user text-zinc-400"></i> profile_card.txt</span>
+                <div class="flex gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-zinc-800 inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-zinc-800 inline-block"></span>
+                </div>
+            </div>
+            
+            <div>
+                <h1 class="text-6xl md:text-7xl font-bold tracking-tight uppercase mb-2 glitch-text flex flex-wrap gap-x-4">
+                    <span class="text-red-500 hover:text-red-400 transition-colors duration-200">Rayyan</span>
+                    <span class="text-emerald-500 hover:text-emerald-400 transition-colors duration-200">Amer</span>
+                </h1>
+                <p class="text-zinc-300 font-semibold text-base font-mono-clean uppercase tracking-wide">
+                    Engineering Student • Indie Game Creator • Mechatronics Enthusiast
+                </p>
+                
+                <p class="text-zinc-400 mt-5 leading-relaxed text-sm md:text-base">
+                    Hi! I'm an intermediate engineering student with a deep fascination for designing things that interact with their environment—whether that's mechanical hardware systems or simulation loops inside a video game. I love studying how physics, logic, and code intertwine to make things move.
+                </p>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-zinc-800/60 text-xs text-zinc-500 flex items-center justify-between font-mono-clean">
+                <span>Currently: Building stuff</span>
+                <span class="text-zinc-400 flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-zinc-600 animate-pulse"></span> Offline Workspace
+                </span>
+            </div>
         </header>
 
-        <!-- Pinned About Note -->
-        <section class="note about board-item-2" tabindex="0">
-            <div class="pin" style="background-color: var(--teal);"></div>
-            <h2>About Me</h2>
-            <p>I build cozy interactive games and play with mechatronics. When I'm not studying for my intermediate pre-engineering, I am either deep in GDScript or writing C++ firmware to make physical hardware move.</p>
-            <div class="tags">
-                <span class="tape">Godot Engine</span>
-                <span class="tape">GDScript</span>
-                <span class="tape">ESP32</span>
-                <span class="tape">C++</span>
-                <span class="tape">Mechatronics</span>
+        <section class="window-box tilt-right md:col-span-4 bg-zinc-900/40 border-2 border-zinc-800/80 p-5 rounded-xl flex flex-col justify-between hover:border-zinc-500/40">
+            <div class="border-b border-zinc-800 pb-2 mb-4">
+                <h2 class="font-bold text-zinc-500 text-xs uppercase tracking-widest font-mono-clean">// My Journey</h2>
+            </div>
+            
+            <div class="font-typewriter text-xs text-zinc-400 space-y-4 leading-relaxed">
+                <p>
+                    I started out simply curious about how virtual worlds functioned. Modding sandbox environments like Minecraft sparked my early interest in code. 
+                </p>
+                <p>
+                    As I dived deeper into engineering, that digital interest collided with physical systems. This path naturally pulled me toward Mechatronics, where programming meets real-world mechanical movement.
+                </p>
+            </div>
+            <div class="h-4"></div>
+        </section>
+
+        <section class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <div class="window-box bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-indigo-500 hover:bg-indigo-950/20 flex flex-col justify-between relative group duration-300">
+                <div class="absolute inset-0 bg-cover bg-center opacity-5 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" style="background-image: url('https://picsum.photos/id/101/500/350');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/80 to-transparent pointer-events-none group-hover:from-indigo-950/80"></div>
+                
+                <div class="relative z-10">
+                    <div class="h-16 bg-gradient-to-r from-zinc-950 to-zinc-900/40 relative flex items-end p-2 border-b border-zinc-850 group-hover:border-indigo-500/40 transition-colors duration-300">
+                        <i class="fa-brands fa-github text-3xl text-zinc-500 group-hover:text-indigo-400 transition-colors duration-300 absolute right-3 bottom-2"></i>
+                    </div>
+                    <div class="p-3.5">
+                        <h3 class="font-bold text-sm text-zinc-200 group-hover:text-white transition-colors">GitHub</h3>
+                        <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+                            Where I commit my experimental scripts, project mechanics, and open source files.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-3.5 pt-0 relative z-10">
+                    <a href="https://github.com/RYNx86/" target="_blank" rel="noopener noreferrer" class="text-xs text-zinc-300 group-hover:text-indigo-400 hover:text-white font-mono-clean flex items-center gap-1 font-semibold transition-colors duration-350">
+                        View Codebase <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="window-box bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-rose-500 hover:bg-rose-950/20 flex flex-col justify-between relative group duration-300">
+                <div class="absolute inset-0 bg-cover bg-center opacity-5 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" style="background-image: url('https://picsum.photos/id/96/500/350');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/80 to-transparent pointer-events-none group-hover:from-rose-950/80"></div>
+
+                <div class="relative z-10">
+                    <div class="h-16 bg-gradient-to-r from-zinc-950 to-zinc-900/40 relative flex items-end p-2 border-b border-zinc-850 group-hover:border-rose-500/40 transition-colors duration-300">
+                        <i class="fa-brands fa-itch-io text-3xl text-zinc-500 group-hover:text-rose-400 transition-colors duration-300 absolute right-3 bottom-2"></i>
+                    </div>
+                    <div class="p-3.5">
+                        <h3 class="font-bold text-sm text-zinc-200 group-hover:text-white transition-colors">Itch.io</h3>
+                        <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+                            Playable builds of my game concepts, physics tests, and creative jam entries.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-3.5 pt-0 relative z-10">
+                    <a href="https://rynx86.itch.io" target="_blank" rel="noopener noreferrer" class="text-xs text-zinc-300 group-hover:text-rose-400 hover:text-white font-mono-clean flex items-center gap-1 font-semibold transition-colors duration-350">
+                        Play My Games <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="window-box bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-red-500 hover:bg-red-950/20 flex flex-col justify-between relative group duration-300">
+                <div class="absolute inset-0 bg-cover bg-center opacity-5 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" style="background-image: url('https://picsum.photos/id/250/500/350');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/80 to-transparent pointer-events-none group-hover:from-red-950/80"></div>
+
+                <div class="relative z-10">
+                    <div class="h-16 bg-gradient-to-r from-zinc-950 to-zinc-900/40 relative flex items-end p-2 border-b border-zinc-850 group-hover:border-red-500/40 transition-colors duration-300">
+                        <i class="fa-brands fa-youtube text-3xl text-zinc-500 group-hover:text-red-500 transition-colors duration-300 absolute right-3 bottom-2"></i>
+                    </div>
+                    <div class="p-3.5">
+                        <h3 class="font-bold text-sm text-zinc-200 group-hover:text-white transition-colors">YouTube</h3>
+                        <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+                            Occasional video essays, programming run-throughs, and particle simulations.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-3.5 pt-0 relative z-10">
+                    <a href="https://youtube.com/@RYNx86-Dev" target="_blank" rel="noopener noreferrer" class="text-xs text-zinc-300 group-hover:text-red-500 hover:text-white font-mono-clean flex items-center gap-1 font-semibold transition-colors duration-350">
+                        Watch Channel <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="window-box bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden hover:border-pink-500 hover:bg-pink-950/20 flex flex-col justify-between relative group duration-300">
+                <div class="absolute inset-0 bg-cover bg-center opacity-5 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none" style="background-image: url('https://picsum.photos/id/367/500/350');"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/80 to-transparent pointer-events-none group-hover:from-pink-950/80"></div>
+
+                <div class="relative z-10">
+                    <div class="h-16 bg-gradient-to-r from-zinc-950 to-zinc-900/40 relative flex items-end p-2 border-b border-zinc-850 group-hover:border-pink-500/40 transition-colors duration-300">
+                        <i class="fa-brands fa-instagram text-3xl text-zinc-500 group-hover:text-pink-500 transition-colors duration-300 absolute right-3 bottom-2"></i>
+                    </div>
+                    <div class="p-3.5">
+                        <h3 class="font-bold text-sm text-zinc-200 group-hover:text-white transition-colors">Instagram</h3>
+                        <p class="text-xs text-zinc-400 mt-1 leading-relaxed">
+                            Visual development logs, mechatronics drafts, and casual design clips.
+                        </p>
+                    </div>
+                </div>
+                <div class="p-3.5 pt-0 relative z-10">
+                    <a href="https://instagram.com/_rayyanamer" target="_blank" rel="noopener noreferrer" class="text-xs text-zinc-300 group-hover:text-pink-500 hover:text-white font-mono-clean flex items-center gap-1 font-semibold transition-colors duration-350">
+                        View Updates <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="window-box tilt-slight md:col-span-12 bg-zinc-900/80 border-2 border-zinc-800/80 p-4 rounded-xl overflow-hidden">
+            <div class="flex items-center justify-between border-b border-zinc-850 pb-2 mb-4 bg-zinc-950/80 px-4 -mx-4 -mt-4 rounded-t-xl">
+                <span class="text-xs font-bold text-zinc-500 font-mono-clean flex items-center gap-2"><i class="fa-solid fa-images text-zinc-450"></i> snapshots.bin</span>
+                <span class="text-[10px] text-zinc-500 font-mono-clean">HOVER TO FREEZE</span>
+            </div>
+
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/60/400/300" alt="Hardware Schematic" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Schematic Draft</span>
+                        </div>
+                    </div>
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/180/400/300" alt="Breadboard" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Automation Test</span>
+                        </div>
+                    </div>
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/96/400/300" alt="Game Code" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Game Engine Loop</span>
+                        </div>
+                    </div>
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/367/400/300" alt="Voxel Art" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Sandbox Voxels</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/60/400/300" alt="Hardware Schematic" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Schematic Draft</span>
+                        </div>
+                    </div>
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/180/400/300" alt="Breadboard" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Automation Test</span>
+                        </div>
+                    </div>
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/96/400/300" alt="Game Code" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Game Engine Loop</span>
+                        </div>
+                    </div>
+                    <div class="relative w-64 h-36 bg-zinc-800 rounded-lg border border-zinc-850 overflow-hidden flex-shrink-0 group">
+                        <img src="https://picsum.photos/id/367/400/300" alt="Voxel Art" class="w-full h-full object-cover grayscale opacity-70 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+                        <div class="absolute bottom-2 left-2 right-2 flex justify-center">
+                            <span class="bg-black/80 py-1 px-2.5 text-[10px] font-mono-clean text-zinc-300 rounded border border-zinc-800 text-center leading-none">Sandbox Voxels</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Project Sticker 1 -->
-        <a class="sticker board-item-3" href="https://rynx86.itch.io" target="_blank" rel="noopener">
-            <div class="photo" style="--c1:#478cbf; --c2:#1d3d57;"><i data-lucide="gamepad-2"></i></div>
-            <h3>My Games</h3>
-            <p>Check out my game creations, game-jam entries, and prototypes built with the Godot engine.</p>
-            <div class="tags">
-                <span class="stamp">Godot</span>
-                <span class="stamp">Itch.io</span>
+        <section class="window-box tilt-extreme md:col-span-5 bg-zinc-950 border-2 border-zinc-800 shadow-md p-4 rounded-xl hover:border-emerald-550/30">
+            <div class="flex items-center justify-between border-b border-zinc-900 pb-2 mb-3 font-mono-clean">
+                <span class="text-xs text-zinc-500 uppercase"><i class="fa-solid fa-circle-nodes"></i> Inspirations</span>
+                <span class="text-xs text-zinc-400 font-bold">FAVORITES</span>
             </div>
-            <span class="go">play on itch.io →</span>
-        </a>
-
-        <!-- Project Sticker 2 -->
-        <a class="sticker board-item-4" href="https://rynx86.github.io" target="_blank" rel="noopener">
-            <div class="photo" style="--c1:#e05b49; --c2:#6a1f15;"><i data-lucide="cpu"></i></div>
-            <h3>Hardware Tinkering</h3>
-            <p>My mechatronics experiments, ESP32 automation chips, and code-meets-circuits builds.</p>
-            <div class="tags">
-                <span class="stamp">ESP32</span>
-                <span class="stamp">IoT</span>
-                <span class="stamp">C++</span>
-            </div>
-            <span class="go">view hardware projects →</span>
-        </a>
-
-        <!-- Project Sticker 3 -->
-        <a class="sticker board-item-5" href="https://github.com/rynx86" target="_blank" rel="noopener">
-            <div class="photo" style="--c1:#2fa572; --c2:#114d33;"><i data-lucide="git-branch"></i></div>
-            <h3>Open Source</h3>
-            <p>Host of my open source experiments, web prototypes, and game scripts on GitHub.</p>
-            <div class="tags">
-                <span class="stamp">GitHub</span>
-                <span class="stamp">Web</span>
-            </div>
-            <span class="go">explore repositories →</span>
-        </a>
-
-        <!-- Project Sticker 4 -->
-        <a class="sticker board-item-6" href="https://Youtube.com/@RYNx86-Dev" target="_blank" rel="noopener">
-            <div class="photo" style="--c1:#ff4a4a; --c2:#801414;"><i data-lucide="youtube"></i></div>
-            <h3>Devlogs & Guides</h3>
-            <p>Where I share my development processes, electronics tutorials, and indie game updates.</p>
-            <div class="tags">
-                <span class="stamp">YouTube</span>
-                <span class="stamp">Devlog</span>
-            </div>
-            <span class="go">watch channel →</span>
-        </a>
-
-        <!-- Social Stickers Grid -->
-        <div class="socials-row board-item-7">
-            <a class="stamp-card" href="https://rynx86.github.io" target="_blank" rel="noopener" aria-label="Portfolio">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/>
-                </svg>
-                <span>portfolio</span>
-            </a>
             
-            <a class="stamp-card" href="https://rynx86.itch.io" target="_blank" rel="noopener" aria-label="Itch.io">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"/>
-                    <path d="M6 12h4m-2-2v4m7-2h.01M18 12h.01"/>
-                </svg>
-                <span>itch.io</span>
-            </a>
-            
-            <a class="stamp-card" href="https://Youtube.com/@RYNx86-Dev" target="_blank" rel="noopener" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-                </svg>
-                <span>youtube</span>
-            </a>
-            
-            <a class="stamp-card" href="https://Instagram.com/_rayyanamer" target="_blank" rel="noopener" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                </svg>
-                <span>instagram</span>
-            </a>
-        </div>
-
-        <!-- GAMING CARD -->
-        <div class="gaming-card board-item-gaming">
-            <div class="gaming-title">
-                <div class="d-pad"></div>
-                I Game A Bit... <i data-lucide="swords"></i>
-            </div>
-            <div class="gaming-screen">
-                <div class="gaming-screen-title"><i data-lucide="play"></i> Active Playlog</div>
-                <div class="gaming-stat-row">
-                    <span>> Assetto Corsa</span>
-                    <span style="color: var(--red);">[DRIVING]</span>
-                </div>
-                <div class="gaming-stat-row">
-                    <span>> Minecraft Voxel</span>
-                    <span style="color: var(--teal);">[CREATIVE]</span>
-                </div>
-                <div class="gaming-stat-row">
-                    <span>> Voices of Void</span>
-                    <span style="color: #444;">[SURVIVAL]</span>
+            <div class="font-pixel text-[15px] space-y-2 leading-relaxed tracking-wider">
+                <p class="text-zinc-500 text-xs">// GAMES THAT SHAPED MY LOGIC:</p>
+                <div class="grid grid-cols-2 gap-1 text-zinc-400">
+                    <span class="hover:text-emerald-450 transition-colors">■ Minecraft</span>
+                    <span class="hover:text-red-400 transition-colors">■ Among Us</span>
+                    <span class="hover:text-cyan-400 transition-colors">■ Assetto Corsa</span>
+                    <span class="hover:text-zinc-200 transition-colors">■ Voices of the Void</span>
+                    <span class="hover:text-amber-500 transition-colors col-span-2">■ GTA San Andreas</span>
                 </div>
             </div>
-            <div class="buttons-row">
-                <div class="btn-game"></div>
-                <div class="btn-game" style="background-color: var(--yellow);"></div>
-            </div>
-        </div>
+        </section>
 
-        <!-- PHOTO GALLERY BOARDS -->
-        <div class="gallery-photo board-item-gallery-1">
-            <div class="photo-frame photo-random-1"></div>
-            <div class="photo-frame-caption"><i data-lucide="camera"></i> random things</div>
-            <div class="polaroid-caption">Coding till 3 AM ☕</div>
-        </div>
-
-        <div class="gallery-photo board-item-gallery-2">
-            <div class="photo-frame photo-random-2"></div>
-            <div class="photo-frame-caption"><i data-lucide="aperture"></i> snap logs</div>
-            <div class="polaroid-caption">Tinkering with wires ⚡</div>
-        </div>
-
-        <div class="gallery-photo board-item-gallery-3">
-            <div class="photo-frame photo-random-3"></div>
-            <div class="photo-frame-caption"><i data-lucide="image"></i> capture</div>
-            <div class="polaroid-caption">Staring at bug #242 🐛</div>
-        </div>
-
-        <!-- RETRO ITEM 1: Polaroid Setup -->
-        <div class="polaroid board-item-polaroid">
-            <div class="polaroid-photo">
-                <div>i5-4590 @ 3.30GHz</div>
-                <div>Intel HD Graphics</div>
-                <div>8GB DDR3 RAM</div>
-                <div class="cpu-spec">POTATO ENGINE <i data-lucide="hard-drive"></i></div>
-            </div>
-            <div class="polaroid-caption">My Humble Workstation</div>
-        </div>
-
-        <!-- RETRO ITEM 2: Cassette Player (Music Stream Feature Add) -->
-        <div class="cassette-player board-item-music" id="cassettePlayer" role="button" aria-label="Play Sweater Weather">
-            <div class="cassette-label">
-                <span id="cassetteSide">Side A</span>
-                <span id="cassetteStatus">[ Click to Play ]</span>
-            </div>
-            <div class="cassette-reels">
-                <div class="reel"></div>
-                <div class="reel"></div>
-            </div>
-            <div class="cassette-info-row">
-                <div class="cassette-meta">
-                    <div class="cassette-title">Sweater Weather</div>
-                    <div class="cassette-artist">The Neighbourhood</div>
+        <section class="window-box tilt-slight md:col-span-7 bg-zinc-900 border-2 border-zinc-800 hover:border-indigo-500 hover:bg-zinc-900 shadow-xl p-5 rounded-xl flex flex-col justify-between group/player duration-300">
+            <div class="font-tech">
+                <div class="flex items-center justify-between border-b border-zinc-850 pb-2 mb-4 group-hover/player:border-indigo-500/20 transition-colors duration-300">
+                    <span class="text-xs font-bold text-zinc-900 bg-zinc-300 px-2.5 py-1 rounded flex items-center gap-2 tracking-wide font-sans shadow-sm">
+                        <i class="fa-solid fa-music"></i> What I'm Playing
+                    </span>
+                    <span id="playing-status" class="text-[10px] text-zinc-500 group-hover/player:text-indigo-400 transition-colors duration-300">PAUSED</span>
                 </div>
-                <div class="cassette-icon-state">
-                    <i data-lucide="music"></i>
+
+                <div class="flex items-center gap-4 bg-zinc-950/80 p-3.5 rounded-lg border border-zinc-850 group-hover/player:border-indigo-550/20 transition-colors">
+                    <div class="w-14 h-14 bg-zinc-900 group-hover/player:bg-indigo-950/40 rounded border border-zinc-800 group-hover/player:border-indigo-500/30 flex items-center justify-center text-xl text-zinc-500 group-hover/player:text-indigo-400 transition-all duration-300 relative overflow-hidden">
+                        <i id="record-icon" class="fa-solid fa-compact-disc"></i>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <h4 id="track-title" class="text-sm font-bold text-zinc-200">Resonance</h4>
+                        <p id="track-author" class="text-xs text-zinc-500">HOME</p>
+                        
+                        <div class="w-full bg-zinc-800 h-1.5 rounded-full mt-2 cursor-pointer relative" id="progress-container">
+                            <div class="bg-zinc-500 group-hover/player:bg-indigo-500 h-1.5 rounded-full w-0 transition-all duration-150" id="progress-bar"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-zinc-500 mt-1">
+                            <span id="curr-time">0:00</span>
+                            <span id="total-time">0:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-4">
+                    <div class="flex items-center gap-3">
+                        <button onclick="prevTrack()" class="w-8 h-8 rounded-md bg-zinc-950 hover:bg-zinc-800 border border-zinc-850 flex items-center justify-center text-xs text-zinc-400 hover:text-white transition-all">
+                            <i class="fa-solid fa-backward"></i>
+                        </button>
+                        <button onclick="togglePlay()" id="play-btn" class="w-10 h-10 rounded-md bg-zinc-700 hover:bg-indigo-600 border border-zinc-600 hover:border-indigo-500/30 flex items-center justify-center text-sm text-white transition-all shadow-md">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <button onclick="nextTrack()" class="w-8 h-8 rounded-md bg-zinc-950 hover:bg-zinc-800 border border-zinc-850 flex items-center justify-center text-xs text-zinc-400 hover:text-white transition-all">
+                            <i class="fa-solid fa-forward"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-volume-low text-xs text-zinc-500 group-hover/player:text-indigo-400 transition-colors"></i>
+                        <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5" class="w-16 h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-zinc-400 group-hover/player:accent-indigo-550">
+                    </div>
                 </div>
             </div>
-            <!-- Audio stream element -->
-            <audio id="cassetteAudio" src="https://audio.com/icii-1/audio/sweater-weather-the-neighbourhood" preload="auto" loop></audio>
-        </div>
 
-        <!-- RETRO ITEM 3: Retro Game Cartridge (Inspirations) -->
-        <div class="game-cartridge board-item-cartridge">
-            <div class="cartridge-label">
-                <div class="cartridge-title"><i data-lucide="disc"></i> FAVORITE GAMES</div>
-                <div class="cartridge-list">
-                    <span><i data-lucide="star"></i> GTA San Andreas</span>
-                    <span><i data-lucide="star"></i> Minecraft</span>
-                    <span><i data-lucide="star"></i> Voices of the Void</span>
-                    <span><i data-lucide="star"></i> Assetto Corsa</span>
-                </div>
-            </div>
-        </div>
+            <audio id="audio-player" preload="metadata"></audio>
+        </section>
 
-        <!-- Pinned Footnote Note -->
-        <footer class="note footnote board-item-8">
-            <div class="pin" style="background-color: var(--yellow); top: -8px;"></div>
-            made with <i data-lucide="heart"></i> & code · rayyan amer · pakistan · 2026
-        </footer>
     </div>
 
-    <!-- External JavaScript Link -->
-    <script src="script.js"></script>
+    <footer class="max-w-6xl mx-auto mt-12 mb-6 px-4 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-600 font-mono-clean border-t border-dashed border-zinc-850 pt-4">
+        <div>Rayyan Amer // 2026</div>
+    </footer>
+
 </body>
 </html>
